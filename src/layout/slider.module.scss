@@ -1,0 +1,49 @@
+@font-face {
+  font-family: 'GothamThin';
+  src: url(../assets/fonts/Gotham-Medium.otf) format('opentype');
+}
+
+.logo {
+  width: 214.73px;
+  -webkit-user-drag: none;
+  margin-bottom: 50px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebarOption {
+  color: #9B9B9B;
+  font-weight: 450;
+  font-family: GothamThin;
+  line-height: 22px;
+  border: none;
+  font-size: 16px;
+  background-color: transparent;
+}
+
+.sidebarActive {
+  background: linear-gradient(270deg, #5BD2CB 0%, #49CBC5 25.33%, #14B5B1 100%);
+  box-shadow: 0px 0px 12px rgba(0, 201, 196, 0.7);
+  border-radius: 5px;
+  padding: 10px 0px;
+  width: 240px;
+  color: white;
+  margin-bottom: 20px;
+  font-weight: 450;
+  border: none;
+  font-family: GothamThin;
+  line-height: 22px;
+  font-size: 16px;
+  transition: all .3s ease-out;
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:active {
+    transform: translateY(-2px);
+  }
+}

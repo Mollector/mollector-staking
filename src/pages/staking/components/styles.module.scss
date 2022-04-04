@@ -1,0 +1,303 @@
+.headerText {
+  font-weight: 450;
+  font-size: 26px;
+  line-height: 34.97px;
+  color: #505d6f;
+}
+
+.amountText {
+  font-size: 14px;
+  line-height: 18px;
+  margin: 10px 0px;
+  color: #97a3ae;
+  font-weight: 400;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: calc(50% - 20px);
+}
+
+.stakeBoxContainer {
+  width: calc(50% - 10px);
+  margin-right: 20px;
+}
+
+.infoBoxContainer {
+  width: calc(50% - 10px);
+}
+
+.box {
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
+  background-color: white;
+  padding: 25px 20px;
+  &:not(:last-child) {
+    margin-right: 20px;
+  }
+}
+
+.claimReward {
+  width: 100%;
+  border: 2px solid #ff8900;
+  height: 50px;
+  background: #ffffff;
+  border-radius: 30px;
+  color: #ff8900;
+  font-size: 16px;
+  line-height: 35px;
+  font-weight: 450;
+  margin-top: 20px;
+  transition: all .3s ease-out;
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:active {
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    background-color: #97A3AE;
+  }
+  
+  &:hover:disabled {
+    cursor: not-allowed;
+  }
+}
+
+
+.stakeButton {
+  margin: 10px;
+  width: 100%;
+  border: none;
+  height: 50px;
+  background: #00af22;
+  border-radius: 30px;
+  color: white;
+  font-size: 16px;
+  line-height: 35px;
+  font-weight: 450;
+  margin-top: 20px;
+  transition: all .3s ease-out;
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:active {
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    background-color: #97A3AE;
+  }
+  
+  &:hover:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.withdraw2Button {
+  margin: 10px;
+  width: 100%;
+  border: 1px solid #fa5555;
+  height: 50px;
+  background: #ffffff;
+  border-radius: 30px;
+  color: #fa5555;
+  font-size: 16px;
+  line-height: 35px;
+  font-weight: 450;
+  margin-top: 20px;
+  transition: all .3s ease-out;
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:active {
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    background-color: #97A3AE;
+  }
+  
+  &:hover:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.withdrawButton {
+  font-size: 16px;
+  font-weight: 450;
+  line-height: 22px;
+  color: #14b5b1;
+  text-align: center;
+  margin-top: 20px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.infoWrapper {
+  margin-top: 20px;
+}
+
+.infoHeader {
+  color: #97A3Ae;
+  line-height: 22px;
+  font-size: 16px;
+  font-weight: 450;
+}
+
+li {
+  color: #97A3Ae;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.boxFooter {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 30px;
+  text-align: center;
+  color: #97A3AE;
+  & > a {
+    color: #FF9F43;
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+  }
+}
+
+.amountTextBig {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 40px;
+  color: #97A3AE;
+}
+
+.titleGraph {
+  font-style: normal;
+  font-weight: 450;
+  font-size: 16px;
+  line-height: 22px;
+  color: #97A3AE;
+}
+
+.wrappGraph {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin: 20px 0 45px;
+}
+.graph {
+  width: calc(100% - 55px);
+  display: flex;
+}
+
+.graphCol {
+  width: 30%;
+  border-left: 1px solid #E9EBF1;
+  border-right: 1px solid #E9EBF1;
+}
+
+.graphColMiddle {
+  border: none
+}
+
+.graphCell {
+  aspect-ratio: 1.85;
+  border-top: 1px solid #E9EBF1;
+  position: relative;
+}
+
+.cornerIcon {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  background-image: url('../../../assets/img/icon-corner-graph.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  top: -17px;
+  right: -17px;
+  z-index: 1;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  &:hover {
+    transform: scale(1.5);
+  }
+}
+
+.graphCellBottom {
+  border-bottom: 1px solid #E9EBF1;
+}
+
+.textGraphRow {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: #97A3AE;
+  position: absolute;
+  top: -8px;
+  left: -70px;
+  width: 50px;
+  text-align: right;
+}
+
+.textGraphRowEnd {
+  bottom: -8px;
+  top: unset;
+}
+
+.textGraphCol {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: #97A3AE;
+  position: absolute;
+  bottom: -30px;
+  left: -25px;
+  width: 50px;
+  text-align: center;
+}
+
+.textGraphColStart {
+  left: 0;
+}
+
+.textGraphColEnd {
+  right: 0;
+  left: unset;
+}
+
+.additionBoxInfo {
+  width: 100px;
+  height: 90px;
+  z-index: 2;
+  position: absolute;
+  right: 10px;
+  top: -100px;
+  background: rgba(36, 55, 70, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.imgGift {
+  width: 65px;
+  height: 65px;
+}
+
+.giftTextInfo {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #FFF176;
+}

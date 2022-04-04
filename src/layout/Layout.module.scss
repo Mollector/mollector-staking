@@ -1,0 +1,117 @@
+@use "helper/style/mixin";
+@use "helper/style/media";
+
+.component {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  color: rgba(var(--text), 1);
+  background: url('../assets/img/mainbackground.png'), #f8f8f8;
+  background-position: center;
+  background-size: cover;
+}
+
+.light {
+  color: rgba(var(--bg), 1);
+
+  background-color: transparent;
+}
+
+.header {
+  position: relative;
+}
+
+.main {
+  flex-grow: 1;
+}
+
+.mobile {
+  @include mixin.from(media.$md) {
+    display: none;
+  }
+}
+
+.desktop {
+  @include mixin.until(media.$md) {
+    display: none;
+  }
+}
+
+.decoration {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+
+  min-height: 100vh;
+
+  overflow: hidden;
+}
+
+.image1 {
+  --size: 9.625rem;
+  position: absolute;
+  top: 15.625rem;
+  left: 50%;
+
+  width: var(--size);
+  height: var(--size);
+  margin-left: -23rem;
+
+  transform: translateX(-50%);
+}
+
+.image2 {
+  --size: 6.25rem;
+  position: absolute;
+  top: 10.05rem;
+  right: 0;
+
+  width: var(--size);
+  height: var(--size);
+
+  transform: translateX(50%);
+}
+
+.image3 {
+  --size: 6.5rem;
+  position: absolute;
+  top: 34.125rem;
+  left: 50%;
+
+  width: var(--size);
+  height: var(--size);
+  margin-left: 23rem;
+
+  transform: translateX(-50%);
+}
+
+.image4 {
+  --size: 3.75rem;
+  position: absolute;
+  top: 63.125rem;
+  left: 50%;
+
+  width: var(--size);
+  height: var(--size);
+  margin-left: -38rem;
+
+  transform: translateX(-50%);
+}
+
+.sidebar {
+  width: 300px;
+  background: none !important;
+  background-image: url('../assets/img/mainbackground.png') !important;
+  background-repeat: no-repeat !important;
+  background-position: 5% 0% !important;
+  background-blend-mode: overlay !important;
+}
+
+.row {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 0px;
+}

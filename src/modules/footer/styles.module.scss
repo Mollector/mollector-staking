@@ -1,0 +1,90 @@
+@font-face {
+  font-family: "GodWordR";
+  src: url("../../assets/fonts/UTM\ God\'s\ WordR.ttf") format("truetype");
+}
+
+
+.wrapper {
+  width: 100%;
+  padding-bottom: 20px;
+  background-color: transparent;
+}
+
+.row {
+  width: 1200px;
+  padding-top: 20px;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+
+.part {
+  width: 30%;
+}
+
+.partFirst {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.partSecond {
+  padding-top: 20px
+}
+
+.description {
+  font-weight: 600;
+  line-height: 130%;
+  font-size: 12px;
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+}
+
+.socialIcon {
+  width: 33px;
+  height: 33px;
+  margin-right: 10px;
+  -webkit-user-drag: none;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.title {
+  font-family: GodWordR;
+  font-size: 16px;
+  font-weight: bold;
+  color: #505D6F;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  line-height: 13.5px;
+}
+
+.linkInfo {
+  font-size: 14px;
+  color: #FF7A00;
+  font-weight: 600;
+  margin-bottom: 7px;
+  line-height: 130%;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.logo {
+  width: 214.73px;
+  -webkit-user-drag: none;
+}
+
+.input {
+  padding: 10px;
+  border: 1px solid #dedede;
+  font-weight: 600;
+  border-radius: 8px;
+  font-family: GothamThin;
+}

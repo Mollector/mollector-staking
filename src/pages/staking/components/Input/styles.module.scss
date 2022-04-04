@@ -1,0 +1,79 @@
+.input {
+  border: none;
+  border-radius: 30px;
+  width: calc(100% - 60px);
+  font-size: 20px;
+  font-weight: bold;
+  padding: 0 20px;
+  height: 35px;
+  text-align: center;
+  color: rgba(20, 181, 177, 0.7);
+}
+
+.inputError {
+  border: 2px solid red !important;
+}
+
+.inputContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+  height: 60px;
+}
+
+.empty {
+  // color: #ffffff;
+  // caret-color: #000000;
+}
+
+.blur {
+  opacity: 0.5;
+}
+
+.inputInfo {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  color: #14B5B1;
+  align-items: center;
+  border: 1px solid #97A3AE;
+  box-sizing: border-box;
+  border-radius: 30px;
+  padding: 12px 15px;
+}
+
+.maxBtn {
+  font-size: 14px;
+  color: #ffffff;
+  background: rgba(20, 181, 177, 0.7);
+  border-radius: 20px; 
+  border: none;
+  width: 50px;
+  height: 26px;
+  line-height: 14px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:disabled {
+    background-color: #97A3AE;
+  }
+  
+  &:hover:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.stakeButton {
+  width: 100%;
+  border: none;
+  height: 50px;
+  background: #FF9F43;
+  border-radius: 30px;
+  color: white;
+  font-size: 26px;
+  line-height: 35px;
+  font-weight: 450;
+}

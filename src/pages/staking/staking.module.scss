@@ -1,0 +1,74 @@
+.descriptionText {
+  font-weight: 450;
+  font-size: 13px;
+  line-height: 17.49px;
+  color: #14b5b1;
+}
+
+.headerText {
+  font-weight: 450;
+  font-size: 26px;
+  line-height: 34.97px;
+  color: #505d6f;
+}
+
+.giftIcon {
+  margin-right: 5px;
+}
+
+.boxWrapper {
+  display: flex;
+}
+
+.amountText {
+  font-size: 14px;
+  line-height: 18px;
+  margin: 10px 0px;
+  color: #97a3ae;
+  font-weight: 400;
+}
+
+.box {
+  width: calc(50% - 20px);
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
+  background-color: white;
+  padding: 25px 15px;
+  &:not(:last-child) {
+    margin-right: 20px;
+  }
+}
+
+.sidebarOption {
+  background: transparent;
+  border-radius: 5px;
+  padding: 10px 0px;
+  width: 240px;
+  box-shadow: 0px 0px 3px #505d6f;
+  border: none;
+  margin-bottom: 20px;
+  color: #505d6f;
+  font-weight: 450;
+  font-family: GothamThin;
+  line-height: 22px;
+  font-size: 16px;
+  transition: all .3s ease-out;
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:active {
+    transform: translateY(-2px);
+  }
+}
+
+.active {
+  background: linear-gradient(270deg, #5BD2CB 0%, #49CBC5 25.33%, #14B5B1 100%);
+  box-shadow: 0px 0px 12px rgba(0, 201, 196, 0.7);
+  color: white;
+  border: none;
+}
+
+.tabWrapper {
+  display: flex;
+}
