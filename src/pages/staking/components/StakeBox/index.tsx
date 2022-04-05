@@ -217,7 +217,7 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
               </div>
             </div>
             : <div style={{color: 'gray', marginTop: 50, textAlign: 'center'}}>
-              You have not stake MOL,<br/>Let's stake your MOL to earn NFT Reward.
+              You have not staked MOL.<br/>Complete staking to earn NFT rewards
             </div>
 
         }
