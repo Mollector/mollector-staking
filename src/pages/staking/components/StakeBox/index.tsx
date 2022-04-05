@@ -201,19 +201,26 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
             )}
           </div>
         </div>
-        <div className={styles.infoWrapper} style={{textAlign: 'center'}}>
-          <span style={{color: '#505d6e'}}>Your Reward</span>
-          <div style={{position: 'relative'}}>
-            <img src={getChestImage(tokenStakedValue)} style={{width: '40%'}}/>
-          </div>
-          <button className={styles.claimReward} style={{width: '40%'}}>
-            <CountDown finishAt={finishAt} />
-          </button>
-          <div style={{color: 'gray'}}>
-            <br/>
-            If you withdraw before {new Date(finishAt).toLocaleString()}. You will not receive NFT Reward.
-          </div>
-        </div>
+        {
+          tokenStakedValue > 0 ?
+            <div className={styles.infoWrapper} style={{textAlign: 'center'}}>
+              <span style={{color: '#505d6e'}}>Your Reward</span>
+              <div style={{position: 'relative'}}>
+                <img src={getChestImage(tokenStakedValue)} style={{width: '40%'}}/>
+              </div>
+              <button className={styles.claimReward} style={{width: '40%'}}>
+                <CountDown finishAt={finishAt} />
+              </button>
+              <div style={{color: 'gray'}}>
+                <br/>
+                If you withdraw before {new Date(finishAt).toLocaleString()}. You will not receive NFT Reward.
+              </div>
+            </div>
+            : <div style={{color: 'gray', marginTop: 50, textAlign: 'center'}}>
+              You have not stake MOL,<br/>Let's stake your MOL to earn NFT Reward.
+            </div>
+
+        }
       </div>
     </div>
   )
