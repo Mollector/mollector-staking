@@ -44,7 +44,7 @@ const LoadingComponent = () => {
     />
   )
 }
-const finishAt = new Date().getTime() + 100000
+const finishAt = new Date().getTime() + 1000000000
 const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
   const { ADDRESS, SYMBOL, NAME } = tokenInfo
   const { account, chainId = 56 } = useWeb3React()

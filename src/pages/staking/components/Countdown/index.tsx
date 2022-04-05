@@ -7,7 +7,6 @@ const CountDown: FC<{
     useEffect(() => {
         let id = setInterval(() => {
             setV(finishAt - new Date().getTime())
-            debugger;
         }, 1000)
 
         // return () => clearInterval(id)
