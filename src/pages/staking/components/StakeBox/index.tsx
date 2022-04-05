@@ -121,7 +121,7 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
   }
 
   const onHandleChangeToMin = () => {
-    setValue('200')
+    setValue('12000')
   }
 
   const onHandleChangeToMax = () => {
@@ -206,7 +206,7 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
             <div className={styles.infoWrapper} style={{textAlign: 'center'}}>
               <span style={{color: '#505d6e'}}>Your Reward</span>
               <div style={{position: 'relative'}}>
-                <img src={getChestImage(tokenStakedValue)} style={{width: '40%'}}/>
+                <img src={getChestImage(tokenStakedValue)} style={{width: '40%'}} className="animate__animated animate__pulse animate__infinite"/>
               </div>
               <button className={styles.claimReward} style={{width: '40%'}}>
                 <CountDown finishAt={finishAt} />
@@ -217,7 +217,7 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
               </div>
             </div>
             : <div style={{color: 'gray', marginTop: 50, textAlign: 'center'}}>
-              You have not staked MOL.<br/>Complete staking to earn NFT rewards
+              You have not staked enough MOL.<br/>Complete at least 12,000 MOL to earn NFT rewards.
             </div>
 
         }
