@@ -30,6 +30,7 @@ const InfoBox: FC<InfoBoxProps> = ({
 
   useEffect(() => {
     const fetchDepositHistory = async () => {
+      if (!account) return
       try {
         const response = await stakingContract.methods.getHistory(tokenInfo.ADDRESS, account, 2000).call()
         const mappedData = mapStakingHistoryData(response)
@@ -44,10 +45,13 @@ const InfoBox: FC<InfoBoxProps> = ({
 
     fetchDepositHistory()
   }, [tokenInfo, account, stakingContract])
-  console.log(depositHistory, 'history ?')
+  // console.log(depositHistory, 'history ?')
+
   return (
     <div className={cx(styles.box, styles.infoBoxContainer)}>
-      <div className={styles.headerText}>Total Value Lock: {tokenBalance} MOL</div>
+      {account?
+        <div className={styles.headerText}>Total Value Lock: {tokenBalance} MOL</div> : <></>
+      }
       <br />
       <br />
       <img src={MolChest} style={{width: '100%'}}/>

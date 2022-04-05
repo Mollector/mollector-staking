@@ -13,21 +13,22 @@ BigNumber.set({
 })
 
 function App() {
+  return <Staking />
   return (
     <Switch>
-      <Route path="/vesting/:address">
+      {/* <Route path="/vesting/:address">
         <AuthRoute component={Vesting} />
-      </Route>
-      <Route path="/staking">
+      </Route> */}
+      <Route path="/">
         <AuthRoute component={Staking} />
       </Route>
-      <Route path="/staking-new-ui">
+      {/* <Route path="/staking-new-ui">
         <AuthRoute component={StakingNewUI} />
-      </Route>
-      <Route path="/">
+      </Route> */}
+      {/* <Route path="/">
         <Route component={Home} />
-      </Route>
-    <Redirect to="/" />
+      </Route> */}
+      <Redirect to="/" />
     </Switch>
   )
 }

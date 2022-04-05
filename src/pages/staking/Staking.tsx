@@ -56,7 +56,6 @@ const Staking: FC = () => {
       {/* <br />
       <div className={styles.headerText}>Stake {tokenInfo.SYMBOL} Token</div>
       <br /> */}
-      <br />
       <SwitchTransition mode="out-in">
         <CSSTransition
           key={tabIndex}

@@ -14,7 +14,11 @@ import useApprove from 'hooks/useApprove'
 import { STAKING_CONTRACT_ADDRESS } from 'const/const'
 import styles from '../styles.module.scss'
 import { getDecimalAmount } from 'utils/formatBalance'
-import royalchest from '../../../../assets/img/royal-chest.png'
+import championchest from '../../../../assets/img/chest/Champion.png'
+import fighterchest from '../../../../assets/img/chest/Fighter.png'
+import masterchest from '../../../../assets/img/chest/Master.png'
+import veteranchest from '../../../../assets/img/chest/Veteran.png'
+import CountDown from '../Countdown'
 interface StakeBoxProps {
   tokenInfo: {
     ADDRESS: string
@@ -40,12 +44,13 @@ const LoadingComponent = () => {
     />
   )
 }
-
+const finishAt = new Date().getTime() + 100000
 const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
   const { ADDRESS, SYMBOL, NAME } = tokenInfo
   const { account, chainId = 56 } = useWeb3React()
   const provider = useWeb3Provider()
   const [value, setValue] = useState('')
+  const [error, setError] = useState('')
   const [isWithdraw, setIsWithdraw] = useState(false)
   const [isStaking, setIsStaking] = useState(false)
   const stakingContract = useStakingContract(provider, STAKING_CONTRACT_ADDRESS[chainId])
@@ -96,6 +101,9 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
 
   const onHandleStake = async (): Promise<void> => {
     try {
+      if (!(parseFloat(value) > 0)) {
+        return 
+      }
       setIsStaking(true)
       const stakeAmount = getDecimalAmount(Number(value)).toString()
       const response = await stakingContract.methods.lock(ADDRESS, stakeAmount).send({ from: account })
@@ -130,10 +138,30 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
 
     // if (!value) return 'Enter Amount'
 
-    return 'Staking'
+    return 'Stake'
 
     // if (!isSufficient) return <>Insufficient {SYMBOL} balance</>
   }, [isSufficient, value, isStaking, SYMBOL])
+
+  if (!account) {
+    return (
+      <div className={cx(styles.container, styles.stakeBoxContainer, styles.box)}>
+        <div style={{color: 'black', textAlign: 'center', marginTop: 50}}>
+          Connect wallet to continue
+        </div>
+      </div>
+    )
+  }
+
+  function getChestImage(amount: any): string {
+    if (amount < 30000) return fighterchest
+    if (amount < 60000) return veteranchest
+    if (amount < 120000) return masterchest
+    if (amount >= 120000) return championchest
+
+    return ''
+  }
+
 
   return (
     <div className={cx(styles.container, styles.stakeBoxContainer, styles.box)}>
@@ -158,7 +186,7 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
           onHandleChangeToMax={onHandleChangeToMax}
         />
         <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-          <button className={styles.withdraw2Button} style={{width: '40%'}} onClick={() => onHandleWithdraw()}>
+          <button className={styles.withdraw2Button} style={{width: '40%'}} disabled={tokenStakedValue == 0} onClick={() => onHandleWithdraw()}>
             Withdraw All
           </button>
           <div style={{width: '40%'}}>
@@ -174,16 +202,17 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
           </div>
         </div>
         <div className={styles.infoWrapper} style={{textAlign: 'center'}}>
-          <br/>
           <span style={{color: '#505d6e'}}>Your Reward</span>
-          <br/>
-          <br/>
           <div style={{position: 'relative'}}>
-            <img src={royalchest} style={{width: '50%'}}/>
+            <img src={getChestImage(tokenStakedValue)} style={{width: '40%'}}/>
           </div>
           <button className={styles.claimReward} style={{width: '40%'}}>
-            30d : 20h : 30m : 20s
+            <CountDown finishAt={finishAt} />
           </button>
+          <div style={{color: 'gray'}}>
+            <br/>
+            If you withdraw before {new Date(finishAt).toLocaleString()}. You will not receive NFT Reward.
+          </div>
         </div>
       </div>
     </div>
