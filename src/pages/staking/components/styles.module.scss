@@ -121,7 +121,9 @@
   }
 
   &:disabled {
-    background-color: #97A3AE;
+    background-color: #ffffff;
+    border: 1px solid #97A3AE;
+    color: #97A3AE;
   }
   
   &:hover:disabled {
