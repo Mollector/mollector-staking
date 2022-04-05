@@ -17,14 +17,14 @@ export const Header: FC<HeaderType & MaybeWithClassName> = ({ className, fixed, 
   const [onPresentLoginModal] = useModal(<LoginModal />)
   
   return (
-    <header className={classNames(styles.component, styles.fixed, className)}>
-      <div className={classNames(styles.wrapper, transparent && styles.transparent)}>
-        <Link to="/">
-          <img className={styles.logo} src={LogoMenu} alt="logo" />
-        </Link>
-        {!account && <button className={styles.connectStyle} onClick={onPresentLoginModal}>Connect to wallet</button>}
-        {account && <button className={styles.account}>Account: {account}</button>}
-      </div>
-    </header>
+    <div style={{textAlign: 'center'}}>
+      <img className={styles.logo} src={LogoMenu} alt="logo" />
+    </div>
+    // <header className={classNames(styles.component, styles.fixed, className)}>
+    //   <div className={classNames(styles.wrapper, transparent && styles.transparent)}>
+    //     {/* {!account && <button className={styles.connectStyle} onClick={onPresentLoginModal}>Connect to wallet</button>}
+    //     {account && <button className={styles.account}>{account.slice(0, 6)}...{account.slice(account.length - 5, account.length)}</button>} */}
+    //   </div>
+    // </header>
   )
 }

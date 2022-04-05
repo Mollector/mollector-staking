@@ -19,6 +19,7 @@ import fighterchest from '../../../../assets/img/chest/Fighter.png'
 import masterchest from '../../../../assets/img/chest/Master.png'
 import veteranchest from '../../../../assets/img/chest/Veteran.png'
 import CountDown from '../Countdown'
+import { LoginModal, useModal } from 'modules/modal'
 interface StakeBoxProps {
   tokenInfo: {
     ADDRESS: string
@@ -69,6 +70,8 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
       setValue(stakeValue)
     }
   }
+
+  const [onPresentLoginModal] = useModal(<LoginModal />)
 
   const isSufficient = useMemo(() => {
     const comparedValue = new BigNumber(tokenBalance).comparedTo(new BigNumber(value)) 
@@ -143,23 +146,35 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
     // if (!isSufficient) return <>Insufficient {SYMBOL} balance</>
   }, [isSufficient, value, isStaking, SYMBOL])
 
-  if (!account) {
-    return (
-      <div className={cx(styles.container, styles.stakeBoxContainer, styles.box)}>
-        <div style={{color: 'black', textAlign: 'center', marginTop: 50}}>
-          Connect wallet to continue
-        </div>
-      </div>
-    )
-  }
-
+  
   function getChestImage(amount: any): string {
     if (amount < 30000) return fighterchest
     if (amount < 60000) return veteranchest
     if (amount < 120000) return masterchest
     if (amount >= 120000) return championchest
-
+    
     return ''
+  }
+  
+  function getChestName(amount: any): string {
+    if (amount < 30000) return 'FIGHTER CHEST'
+    if (amount < 60000) return 'VETERAN CHEST'
+    if (amount < 120000) return 'MASTER CHEST'
+    if (amount >= 120000) return 'CHAMPION CHEST'
+    
+    return ''
+  }
+
+  if (!account) {
+    return (
+      <div className={cx(styles.container, styles.stakeBoxContainer, styles.box)}>
+        <div style={{color: 'black', textAlign: 'center', marginTop: 50}}>
+          Connect wallet to continue
+          <br/><br/>
+          <button className={styles.connectStyle} onClick={onPresentLoginModal}>Connect wallet</button>
+        </div>
+      </div>
+    )
   }
 
 
@@ -168,7 +183,6 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
       <div>
         <div className={styles.headerText}>
             Your Stake <span
-            className={styles.headerText}
             style={{
               color: '#14b5b1',
               margin: '10px 0px',
@@ -177,7 +191,7 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
             {tokenStakedValue.toLocaleString()} {SYMBOL}
           </span>
         </div>
-        <div className={styles.amountText}>Your Mol: {tokenBalance.toLocaleString()} MOl</div>
+        <div className={styles.amountText}>Your MOL: <b>{tokenBalance.toLocaleString()} MOL</b> | {account.slice(0, 5)}...{account.slice(account.length - 5)}</div>
         <Input
           value={value}
           isDisableMinMax={isDisableMinMax}
@@ -204,16 +218,16 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
         {
           tokenStakedValue > 0 ?
             <div className={styles.infoWrapper} style={{textAlign: 'center'}}>
-              <span style={{color: '#505d6e'}}>Your Reward</span>
+              <span style={{color: '#505d6e', fontWeight: 'normal'}}>Your Reward: <b>{getChestName(tokenStakedValue)}</b></span>
               <div style={{position: 'relative'}}>
                 <img src={getChestImage(tokenStakedValue)} style={{width: '40%'}} className="animate__animated animate__pulse animate__infinite"/>
               </div>
-              <button className={styles.claimReward} style={{width: '40%'}}>
+              <button className={styles.claimReward} style={{width: '250px'}}>
                 <CountDown finishAt={finishAt} />
               </button>
-              <div style={{color: 'gray'}}>
+              <div style={{color: 'gray', fontWeight: 'normal'}}>
                 <br/>
-                If you withdraw before {new Date(finishAt).toLocaleString()}. You will not receive NFT Reward.
+                Rewards will be revoked if Staking is withdrawn<br/>before {new Date(finishAt).toLocaleString()}
               </div>
             </div>
             : <div style={{color: 'gray', marginTop: 50, textAlign: 'center'}}>
