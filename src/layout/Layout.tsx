@@ -51,6 +51,7 @@ export const Layout: FC<LayoutType> = ({
           <div style={{textAlign: 'center', marginTop: 20, color: '#239ef7', fontWeight: 'normal'}}>
             <a href='https://docs.mollector.com/about-mollector/introduction' target="_blank">Help</a> | <a href='#' target="_blank">Terms & Conditions</a> | <a href='https://t.me/MollectorGame' target="_blank">Telegram</a>
           </div>
+          <br/>
         </main>
         {/* <Footer /> */}
       </div>
