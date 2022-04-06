@@ -50,7 +50,7 @@ const InfoBox: FC<InfoBoxProps> = ({
   return (
     <div className={cx(styles.box, styles.infoBoxContainer)}>
       {account?
-        <div className={styles.headerText}>Total Value Lock: {tokenBalance} MOL</div> : <></>
+        <div className={styles.headerText}>Total Value Lock: {tokenBalance.toLocaleString()} MOL</div> : <></>
       }
       <br />
       <br />
