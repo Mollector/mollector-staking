@@ -24,11 +24,9 @@ const CountDown: FC<{
 
     s = v < 0 ? 0 : s
 
-    return (
-        <span>
-            {d}d : {h}h : {m}m : {s}s
-        </span>
-    )
+    if (d > 0) return <span>{d}d : {h}h : {m}m : {s}s</span>
+    if (h > 0) return <span>{h}h : {m}m : {s}s</span>
+    return <span>{m}m : {s}s</span>
 }
 
 export default CountDown
