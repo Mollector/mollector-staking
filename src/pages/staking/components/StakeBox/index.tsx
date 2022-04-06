@@ -158,9 +158,9 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
   
   function getChestName(amount: any): string {
     if (amount < 30000) return 'FIGHTER CHEST'
-    if (amount < 60000) return 'VETERAN CHEST'
-    if (amount < 120000) return 'MASTER CHEST'
-    if (amount >= 120000) return 'CHAMPION CHEST'
+    if (amount < 60000) return '2 VETERAN CHESTS'
+    if (amount < 120000) return '3 MASTER CHESTS'
+    if (amount >= 120000) return '4 CHAMPION CHESTS'
     
     return ''
   }

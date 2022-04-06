@@ -18,7 +18,11 @@ export const Header: FC<HeaderType & MaybeWithClassName> = ({ className, fixed, 
   
   return (
     <div style={{textAlign: 'center'}}>
-      <img className={styles.logo} src={LogoMenu} alt="logo" />
+      <img src={LogoMenu} alt="logo" style={{height: 60}} />
+      <div style={{color: '#333333'}}>
+        <b>STAKING EVENT</b>
+      </div>
+      <br/>
     </div>
     // <header className={classNames(styles.component, styles.fixed, className)}>
     //   <div className={classNames(styles.wrapper, transparent && styles.transparent)}>
