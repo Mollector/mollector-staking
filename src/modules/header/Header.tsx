@@ -23,7 +23,7 @@ export const Header: FC<HeaderType & MaybeWithClassName> = ({ className, fixed, 
       <img src={LogoMenu} alt="logo" style={{height: 60}} />
       <div style={{color: '#333333', fontSize: 24}}>
         {new Date().getTime() >= STAKING_FINISH_AT ? <b>MOL STAKING EVENT CLOSED</b>
-          :<b style={{textTransform: 'uppercase'}}>STAKING EVENT CLOSES IN <CountDown finishAt={STAKING_FINISH_AT} /></b>
+          :<b style={{textTransform: 'uppercase'}}>STAKING EVENT CLOSES IN <br/><CountDown finishAt={STAKING_FINISH_AT} /></b>
         }
         
       </div>
