@@ -10,7 +10,7 @@ import CornerIcon from './CornerIcon'
 import { mapStakingHistoryData } from 'pages/staking/utils/mapHistoryData'
 import { FilteredStakingData } from 'pages/staking/types'
 import useTokenBalance from 'hooks/useTokenBalance'
-import MolChest from '../../../../assets/img/mol-chest.png'
+import MolChest from '../../../../assets/img/chest/MOL-reward.png'
 interface InfoBoxProps {
   tokenInfo: {
     ADDRESS: string
@@ -50,11 +50,13 @@ const InfoBox: FC<InfoBoxProps> = ({
   return (
     <div className={cx(styles.box, styles.infoBoxContainer)}>
       {account?
-        <div className={styles.headerText}>Total Value Lock: {tokenBalance} MOL</div> : <></>
+        <div className={styles.headerText}>Total Value Lock: {tokenBalance.toLocaleString()} MOL</div> : <></>
       }
       <br />
       <br />
-      <img src={MolChest} style={{width: '100%'}}/>
+      <div style={{color: '#505d6f'}}>AVAILABLE REWARDS</div>
+      <br/>
+      <img src={MolChest} style={{width: 'calc(100% + 26px)', margin: '0 -13px'}}/>
       {/* <div className={styles.amountTextBig}></div> */}
       {/* <div className={styles.titleGraph}>MOL</div>
       <div className={styles.wrappGraph}>

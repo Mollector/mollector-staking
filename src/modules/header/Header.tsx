@@ -6,6 +6,8 @@ import styles from './Header.module.scss'
 import { MaybeWithClassName } from 'helper/react/types'
 import LogoMenu from 'assets/img/menu.png'
 import { LoginModal, useModal } from 'modules/modal'
+import CountDown from 'pages/staking/components/Countdown'
+import { STAKING_FINISH_AT } from 'const/const'
 
 type HeaderType = {
   fixed?: boolean
@@ -18,7 +20,14 @@ export const Header: FC<HeaderType & MaybeWithClassName> = ({ className, fixed, 
   
   return (
     <div style={{textAlign: 'center'}}>
-      <img className={styles.logo} src={LogoMenu} alt="logo" />
+      <img src={LogoMenu} alt="logo" style={{height: 60}} />
+      <div style={{color: '#333333', fontSize: 24}}>
+        {new Date().getTime() >= STAKING_FINISH_AT ? <b>MOL STAKING EVENT CLOSED</b>
+          :<b style={{textTransform: 'uppercase'}}>STAKING EVENT CLOSES IN <CountDown finishAt={STAKING_FINISH_AT} /></b>
+        }
+        
+      </div>
+      <br/>
     </div>
     // <header className={classNames(styles.component, styles.fixed, className)}>
     //   <div className={classNames(styles.wrapper, transparent && styles.transparent)}>

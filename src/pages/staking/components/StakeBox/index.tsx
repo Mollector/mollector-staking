@@ -11,7 +11,7 @@ import useTokenBalance from 'hooks/useTokenBalance'
 import useStakeValue from 'hooks/useStakeValue'
 import useIsApproved from 'hooks/useIsApproved'
 import useApprove from 'hooks/useApprove'
-import { STAKING_CONTRACT_ADDRESS } from 'const/const'
+import { STAKING_CONTRACT_ADDRESS, STAKING_FINISH_AT } from 'const/const'
 import styles from '../styles.module.scss'
 import { getDecimalAmount } from 'utils/formatBalance'
 import championchest from '../../../../assets/img/chest/Champion.png'
@@ -45,7 +45,6 @@ const LoadingComponent = () => {
     />
   )
 }
-const finishAt = new Date().getTime() + 1000000000
 const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
   const { ADDRESS, SYMBOL, NAME } = tokenInfo
   const { account, chainId = 56 } = useWeb3React()
@@ -191,7 +190,7 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
             {tokenStakedValue.toLocaleString()} {SYMBOL}
           </span>
         </div>
-        <div className={styles.amountText}>Your MOL: <b>{tokenBalance.toLocaleString()} MOL</b> | {account.slice(0, 5)}...{account.slice(account.length - 5)}</div>
+        <div className={styles.amountText}>Your MOL balance: <b>{tokenBalance.toLocaleString()} MOL</b> | {account.slice(0, 5)}...{account.slice(account.length - 5)}</div>
         <Input
           value={value}
           isDisableMinMax={isDisableMinMax}
@@ -223,11 +222,11 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
                 <img src={getChestImage(tokenStakedValue)} style={{width: '40%'}} className="animate__animated animate__pulse animate__infinite"/>
               </div>
               <button className={styles.claimReward} style={{width: '250px'}}>
-                <CountDown finishAt={finishAt} />
+                <CountDown finishAt={STAKING_FINISH_AT} />
               </button>
-              <div style={{color: 'gray', fontWeight: 'normal'}}>
+              <div style={{color: '#f95554', fontWeight: 'normal'}}>
                 <br/>
-                Rewards will be revoked if Staking is withdrawn<br/>before {new Date(finishAt).toLocaleString()}
+                Rewards will be revoked if Staking is withdrawn<br/>before {new Date(STAKING_FINISH_AT).toLocaleString()}
               </div>
             </div>
             : <div style={{color: 'gray', marginTop: 50, textAlign: 'center'}}>
