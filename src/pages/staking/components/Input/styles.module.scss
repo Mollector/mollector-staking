@@ -56,10 +56,6 @@
   &:hover {
     cursor: pointer;
   }
-
-  &:disabled {
-    background-color: #97A3AE;
-  }
   
   &:hover:disabled {
     cursor: not-allowed;
