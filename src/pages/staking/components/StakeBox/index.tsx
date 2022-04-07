@@ -11,7 +11,7 @@ import useTokenBalance from 'hooks/useTokenBalance'
 import useStakeValue from 'hooks/useStakeValue'
 import useIsApproved from 'hooks/useIsApproved'
 import useApprove from 'hooks/useApprove'
-import { STAKING_CONTRACT_ADDRESS, STAKING_FINISH_AT } from 'const/const'
+import { STAKING_CONTRACT_ADDRESS, STAKING_FINISH_AT, STAKING_REWARD_AT } from 'const/const'
 import styles from '../styles.module.scss'
 import { getDecimalAmount } from 'utils/formatBalance'
 import championchest from '../../../../assets/img/chest/Champion.png'
@@ -202,17 +202,19 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
           <button className={styles.withdraw2Button} style={{width: '40%'}} disabled={tokenStakedValue == 0} onClick={() => onHandleWithdraw()}>
             Withdraw All
           </button>
-          <div style={{width: '40%'}}>
-            {isTokenApproved ? (
-              <button className={styles.stakeButton} onClick={() => onHandleStake()}>
-                {buttonText}
-              </button>
-            ) : (
-              <button className={styles.stakeButton} onClick={() => onHandleApproveToken()}>
-                {isLoadingOnApproveToken || isLoadingTokenApproved ? <LoadingComponent /> : <>Approve</>}
-              </button>
-            )}
-          </div>
+          {STAKING_FINISH_AT > new Date().getTime() &&
+            <div style={{width: '40%'}}>
+              {isTokenApproved ? (
+                <button className={styles.stakeButton} onClick={() => onHandleStake()}>
+                  {buttonText}
+                </button>
+              ) : (
+                <button className={styles.stakeButton} onClick={() => onHandleApproveToken()}>
+                  {isLoadingOnApproveToken || isLoadingTokenApproved ? <LoadingComponent /> : <>Approve</>}
+                </button>
+              )}
+            </div>
+          }
         </div>
         {
           tokenStakedValue > 0 ?
@@ -222,11 +224,11 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
                 <img src={getChestImage(tokenStakedValue)} style={{width: '40%'}} className="animate__animated animate__pulse animate__infinite"/>
               </div>
               <button className={styles.claimReward} style={{width: '250px'}}>
-                <CountDown finishAt={STAKING_FINISH_AT} />
+                <CountDown finishAt={STAKING_REWARD_AT} />
               </button>
               <div style={{color: '#f95554', fontWeight: 'normal'}}>
                 <br/>
-                Rewards will be revoked if Staking is withdrawn<br/>before {new Date(STAKING_FINISH_AT).toLocaleString()}
+                Rewards will be revoked if Staking is withdrawn<br/>before {new Date(STAKING_REWARD_AT).toLocaleString()}
               </div>
             </div>
             : <div style={{color: 'gray', marginTop: 50, textAlign: 'center'}}>
