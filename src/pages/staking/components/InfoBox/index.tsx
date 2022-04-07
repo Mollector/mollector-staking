@@ -28,24 +28,23 @@ const InfoBox: FC<InfoBoxProps> = ({
   const [tokenBalance] = useTokenBalance(tokenInfo.ADDRESS, STAKING_CONTRACT_ADDRESS[chainId])
   const stakingContract = useStakingContract(provider, STAKING_CONTRACT_ADDRESS[chainId])
 
-  useEffect(() => {
-    const fetchDepositHistory = async () => {
-      if (!account) return
-      try {
-        const response = await stakingContract.methods.getHistory(tokenInfo.ADDRESS, account, 2000).call()
-        const mappedData = mapStakingHistoryData(response)
-        setDepositHistory(mappedData)
-      } catch (error) {
-        console.log(error, 'ERROR ?')
-        toast.error('Fail to fetch history info', {
-          hideProgressBar: true,
-        })
-      }
-    }
+  // useEffect(() => {
+  //   const fetchDepositHistory = async () => {
+  //     if (!account) return
+  //     try {
+  //       console.log('does come here')
+  //       const response = await stakingContract.methods.getHistory(tokenInfo.ADDRESS, account, 2000).call()
+  //       const mappedData = mapStakingHistoryData(response)
+  //       setDepositHistory(mappedData)
+  //     } catch (error) {
+  //       toast.error('Fail to fetch history info', {
+  //         hideProgressBar: true,
+  //       })
+  //     }
+  //   }
 
-    fetchDepositHistory()
-  }, [tokenInfo, account, stakingContract])
-  // console.log(depositHistory, 'history ?')
+  //   fetchDepositHistory()
+  // }, [tokenInfo, account, stakingContract])
 
   return (
     <div className={cx(styles.box, styles.infoBoxContainer)}>

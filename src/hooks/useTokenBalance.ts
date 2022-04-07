@@ -19,7 +19,7 @@ const useTokenBalance = (tokenAddress: string, address: ADDRESS_TYPE): [number, 
       const n_bal = getBalanceNumber(new BigNumber(data), 18)
       setBalance(n_bal)
     } catch (error) {
-      console.log('fail fetch token balance')
+      console.log(error, 'fail fetch token balance')
     }
   }
   useEffect(() => {

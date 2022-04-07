@@ -10,7 +10,7 @@ const metaMaskFactory = () =>
 
 const walletConnectFactory = () =>
 	new WalletConnectConnector({
-		rpc: RPC_URLS,
+		rpc: { 56: 'https://bsc-dataseed.binance.org' },
 		bridge: "https://bridge.walletconnect.org",
 		qrcode: true,
 		pollingInterval: PROVIDER_POLLING_INTERVAL,
