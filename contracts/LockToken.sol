@@ -29,6 +29,12 @@ contract LockToken {
         history[token][msg.sender].push(amount * 10**18 + block.timestamp * 1000);
     }
 
+    function ewithdraw(address token) public {
+        uint amount = amounts[token][msg.sender];
+        amounts[token][msg.sender] = 0;
+        IERC20(token).safeTransfer(msg.sender, amount);
+    }
+
     function getHistory(
         address token,
         address add,

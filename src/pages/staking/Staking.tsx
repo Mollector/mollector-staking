@@ -7,29 +7,19 @@ import InfoBox from './components/InfoBox'
 import styles from './staking.module.scss'
 import { ReactComponent as GiftSvg } from 'assets/img/gift.svg'
 import { STAKE_TOKEN_TYPE } from './types'
-
-const STAKE_TOKEN: STAKE_TOKEN_TYPE = {
-  1: {
-    ADDRESS: '0x256c8aF0Aa0F2c94C2204294aE5656e263fA6643',
-    SYMBOL: 'MOL',
-    NAME: 'MOL',
-  },
-  2: {
-    ADDRESS: '0x88E602C8DFC84B311b36d216F1342e8492B5F40d',
-    SYMBOL: 'BUSD',
-    NAME: 'BUSD',
-  },
-}
+import { TOKEN1_STAKE, TOKEN2_STAKE } from 'const/const'
+import { useWeb3React } from '@web3-react/core'
 
 const Staking: FC = () => {
   const [tabIndex, setTabIndex] = useState<1 | 2>(1)
+  const { account, chainId = 56 } = useWeb3React()
 
   const onChangeTab = (tIndex: 1 | 2) => {
     setTabIndex(tIndex)
   }
 
   const tokenInfo = useMemo(() => {
-    return STAKE_TOKEN[tabIndex]
+    return tabIndex == 1 ? TOKEN1_STAKE[chainId] : TOKEN2_STAKE[chainId]
   }, [tabIndex])
 
   return (

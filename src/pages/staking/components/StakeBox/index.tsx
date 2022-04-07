@@ -147,6 +147,7 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
 
   
   function getChestImage(amount: any): string {
+    if (amount < 12000) return ''
     if (amount < 30000) return fighterchest
     if (amount < 60000) return veteranchest
     if (amount < 120000) return masterchest
@@ -156,6 +157,7 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
   }
   
   function getChestName(amount: any): string {
+    if (amount < 12000) return ''
     if (amount < 30000) return 'FIGHTER CHEST'
     if (amount < 60000) return 'VETERAN CHEST'
     if (amount < 120000) return 'MASTER CHEST'
@@ -216,8 +218,7 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
             </div>
           }
         </div>
-        {
-          tokenStakedValue > 0 ?
+        {getChestName(tokenStakedValue) ?
             <div className={styles.infoWrapper} style={{textAlign: 'center'}}>
               <span style={{color: '#505d6e', fontWeight: 'normal'}}>Your Reward: <b>{getChestName(tokenStakedValue)}</b></span>
               <div style={{position: 'relative'}}>
