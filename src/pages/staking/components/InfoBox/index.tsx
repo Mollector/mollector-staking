@@ -38,7 +38,7 @@ const InfoBox: FC<InfoBoxProps> = ({
   
   useEffect(() => {
     (async () => {
-      if (SYMBOL != 'MOL') {
+      if (SYMBOL != 'MOL' && account) {
         var { _reserve0, _reserve1 } = await LPContract.methods.getReserves().call()
         var totalSupply = await LPContract.methods.totalSupply().call()
   
@@ -92,6 +92,12 @@ const InfoBox: FC<InfoBoxProps> = ({
       <div style={{color: '#505d6f'}}>AVAILABLE REWARDS</div>
       <br/>
       <img src={tokenInfo.SYMBOL == 'MOL' ? MolChest : LPChest} style={{width: 'calc(100% + 26px)', margin: '0 -13px'}}/>
+      <div style={{textAlign: 'center'}}>
+        <a href='https://pancakeswap.finance/swap?outputCurrency=0x06597ffafd82e66eced9209d539032571abd50d9&inputCurrency=0xe9e7cea3dedca5984780bafc599bd69add087d56'
+          target="_blank">
+            Buy MOL on PancakeSwap
+          </a>
+      </div>
     </div>
   )
 }

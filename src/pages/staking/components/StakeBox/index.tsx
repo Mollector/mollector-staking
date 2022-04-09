@@ -165,12 +165,6 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
         var { _reserve0, _reserve1 } = await LPContract.methods.getReserves().call()
         var totalSupply = await LPContract.methods.totalSupply().call()
   
-        console.log({
-          _reserve0, 
-          _reserve1,
-          totalSupply
-        })
-  
         setReserve({
           totalSupply: new BigNumber(totalSupply).div(10 ** 18).toNumber(),
           usd: new BigNumber(_reserve1).div(10 ** 18).toNumber() * 2
