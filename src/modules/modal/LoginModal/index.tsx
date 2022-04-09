@@ -42,7 +42,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ onDismiss = () => {} }) => {
               className={styles.button}
               type="button"
               onClick={() => {
-                if (window.ethereum && window.ethereum.isMetaMask && window.ethereum.isMetaMask === true) {
+                if (window.ethereum && (window.ethereum.isMetaMask || window.ethereum.isTrust)) {
                   login(connectors[0].connectorId)
                   onDismiss()
                 } else {
@@ -80,7 +80,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ onDismiss = () => {} }) => {
               className={styles.button}
               type="button"
               onClick={() => {
-                if (window.ethereum && window.ethereum.isMetaMask && window.ethereum.isMetaMask === true) {
+                if (window.ethereum && window.ethereum.isTrust) {
                   login(connectors[2].connectorId)
                   onDismiss()
                 } else {
