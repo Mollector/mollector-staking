@@ -12,6 +12,7 @@ export interface TOKEN_MAPPING {
   [key: string | number]: {
     ADDRESS: string
     SYMBOL: string
-    NAME: string
+    NAME: string,
+    MIN: string
   }
 }

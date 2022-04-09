@@ -1,11 +1,11 @@
-import React, { FC, useState, ChangeEvent, useMemo } from 'react'
+import React, { FC, useState, ChangeEvent, useMemo, useEffect } from 'react'
 import { Oval } from 'react-loader-spinner'
 import { toast } from 'react-toastify'
 import { useWeb3React } from '@web3-react/core'
 import cx from 'classnames'
 import BigNumber from 'bignumber.js'
 import { useWeb3Provider } from 'web3/web3'
-import { useBep20TokenContract, useStakingContract } from 'web3/contract'
+import { useBep20TokenContract, useLPContract, useStakingContract } from 'web3/contract'
 import Input from '../Input'
 import useTokenBalance from 'hooks/useTokenBalance'
 import useStakeValue from 'hooks/useStakeValue'
@@ -18,6 +18,13 @@ import championchest from '../../../../assets/img/chest/Champion.png'
 import fighterchest from '../../../../assets/img/chest/Fighter.png'
 import masterchest from '../../../../assets/img/chest/Master.png'
 import veteranchest from '../../../../assets/img/chest/Veteran.png'
+
+import merchantchest from '../../../../assets/img/chest/Merchant.png'
+import noblechest from '../../../../assets/img/chest/Noble.png'
+import royalchest from '../../../../assets/img/chest/Royal.png'
+import vipchest from '../../../../assets/img/chest/VIP.png'
+
+
 import CountDown from '../Countdown'
 import { LoginModal, useModal } from 'modules/modal'
 interface StakeBoxProps {
@@ -25,6 +32,7 @@ interface StakeBoxProps {
     ADDRESS: string
     SYMBOL: string
     NAME: string
+    MIN: string
   }
 }
 
@@ -46,7 +54,7 @@ const LoadingComponent = () => {
   )
 }
 const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
-  const { ADDRESS, SYMBOL, NAME } = tokenInfo
+  const { ADDRESS, SYMBOL, NAME, MIN } = tokenInfo
   const { account, chainId = 56 } = useWeb3React()
   const provider = useWeb3Provider()
   const [value, setValue] = useState('')
@@ -58,6 +66,12 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
   const [allTokenStakedBalance] = useTokenBalance(ADDRESS, STAKING_CONTRACT_ADDRESS[chainId])
   const tokenContract = useBep20TokenContract(provider, ADDRESS)
   const [tokenStakedValue] = useStakeValue(ADDRESS, STAKING_CONTRACT_ADDRESS[chainId])
+  const LPContract = useLPContract(provider, ADDRESS)
+  const [reserve, setReserve] = useState({
+    totalSupply: 0,
+    usd: 0
+  })
+
   const [isTokenApproved, refetchStatusToken, isLoadingTokenApproved] = useIsApproved(
     tokenContract,
     STAKING_CONTRACT_ADDRESS[chainId],
@@ -123,7 +137,7 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
   }
 
   const onHandleChangeToMin = () => {
-    setValue('12000')
+    setValue(MIN)
   }
 
   const onHandleChangeToMax = () => {
@@ -145,8 +159,41 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
     // if (!isSufficient) return <>Insufficient {SYMBOL} balance</>
   }, [isSufficient, value, isStaking, SYMBOL])
 
+  useEffect(() => {
+    (async () => {
+      if (SYMBOL != 'MOL' && account) {
+        var { _reserve0, _reserve1 } = await LPContract.methods.getReserves().call()
+        var totalSupply = await LPContract.methods.totalSupply().call()
+  
+        console.log({
+          _reserve0, 
+          _reserve1,
+          totalSupply
+        })
+  
+        setReserve({
+          totalSupply: new BigNumber(totalSupply).div(10 ** 18).toNumber(),
+          usd: new BigNumber(_reserve1).div(10 ** 18).toNumber() * 2
+        })
+      }
+    })()
+  }, [tokenStakedValue, account, SYMBOL])
+
   
   function getChestImage(amount: any): string {
+
+    if (SYMBOL != 'MOL') {
+      var v = (parseInt(tokenStakedValue as any) / reserve.totalSupply) * reserve.usd
+
+      if (v < 500) return ''
+
+      if (v < 1249) return merchantchest
+      if (v < 2499) return vipchest
+      if (v < 4999) return noblechest
+
+      return royalchest
+    }
+
     if (amount < 12000) return ''
     if (amount < 30000) return fighterchest
     if (amount < 60000) return veteranchest
@@ -157,6 +204,19 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
   }
   
   function getChestName(amount: any): string {
+
+    if (SYMBOL != 'MOL') {
+      var v = (parseInt(tokenStakedValue as any) / reserve.totalSupply) * reserve.usd
+
+      if (v < 500) return ''
+
+      if (v < 1249) return 'MERCHANT CHEST'
+      if (v < 2499) return 'VIP CHEST'
+      if (v < 4999) return 'NOBLECHEST'
+
+      return 'ROYAL CHEST'
+    }
+
     if (amount < 12000) return ''
     if (amount < 30000) return 'FIGHTER CHEST'
     if (amount < 60000) return 'VETERAN CHEST'
@@ -189,10 +249,15 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
               margin: '10px 0px',
             }}
           >
-            {tokenStakedValue.toLocaleString()} {SYMBOL}
+            <span>{tokenStakedValue.toLocaleString()} <span style={{fontSize: 14}}>{SYMBOL}</span></span>
           </span>
         </div>
-        <div className={styles.amountText}>Your MOL balance: <b>{tokenBalance.toLocaleString()} MOL</b> | {account.slice(0, 5)}...{account.slice(account.length - 5)}</div>
+        {tokenStakedValue && reserve.totalSupply && SYMBOL != 'MOL' ?
+          <div style={{color: 'gray'}}>
+            Estimate Your Staked LP Value: <span>${parseFloat(((parseInt(tokenStakedValue as any) / reserve.totalSupply) * reserve.usd).toFixed(2)).toLocaleString()}</span>
+          </div> : <></>
+        }
+        <div className={styles.amountText}>Your {SYMBOL} balance: <b>{tokenBalance.toLocaleString()}</b> | {account.slice(0, 5)}...{account.slice(account.length - 5)}</div>
         <Input
           value={value}
           isDisableMinMax={isDisableMinMax}
@@ -233,9 +298,8 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
               </div>
             </div>
             : <div style={{color: 'gray', marginTop: 50, textAlign: 'center'}}>
-              You have not staked enough MOL.<br/>Complete at least 12,000 MOL to earn NFT rewards.
+              You have not staked enough {SYMBOL}.<br/>Complete at least {parseFloat(MIN).toLocaleString()} {SYMBOL} to earn NFT rewards.
             </div>
-
         }
       </div>
     </div>

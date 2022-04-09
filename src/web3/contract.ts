@@ -5,6 +5,7 @@ import type { Contract as ContractType } from "web3-eth-contract";
 import VestingABI from "./abi/Vesting.json";
 import StakingABI from './abi/Staking.json'
 import TokenABI from './abi/erc20.json'
+import LPABI from './abi/LP.json'
 
 const factoryContract = (abi: any, provider: string, address: string): ContractType => {
 	// @ts-ignore
@@ -26,3 +27,7 @@ export const useStakingContract = (provider: string, address: string) => {
 export const useBep20TokenContract = (provider: string, address: string) => {
 	return useMemo(() => factoryContract(TokenABI, provider, address), [provider]);
 };
+
+export const useLPContract = (provider: string, address: string) => {
+	return useMemo(() => factoryContract(LPABI, provider, address), [provider]);
+}

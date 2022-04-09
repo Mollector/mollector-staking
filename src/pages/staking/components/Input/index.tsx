@@ -22,7 +22,7 @@ const Input: FC<InputProps> = ({ value, onChange, onHandleChangeToMin, onHandleC
           <button className={styles.maxBtn} onClick={onHandleChangeToMin} disabled={isDisableMinMax}>
             Min
           </button>
-          <input placeholder='Enter MOL amount' className={cx(styles.input, { [styles.empty]: `${value}` })} value={value} onChange={onChange} />
+          <input placeholder='Enter amount' className={cx(styles.input, { [styles.empty]: `${value}` })} value={value} onChange={onChange} />
           {/* <div className={cx({ [styles.blur]: !value })}>{value || 0}</div> */}
           <button className={styles.maxBtn} onClick={onHandleChangeToMax} disabled={isDisableMinMax}>Max</button>
         </div>
