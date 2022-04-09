@@ -34,7 +34,7 @@ const useAuth = () => {
     if (connector) {
       activate(connector, async (error) => {
         if (error instanceof UnsupportedChainIdError) {
-          if (connector instanceof InjectedConnector && window.ethereum.isMetaMask) {
+          if (connector instanceof InjectedConnector && (window.ethereum.isMetaMask || window.ethereum.isTrust)) {
             const hasSetup = await setupNetwork()
             if (hasSetup) {
               activate(connector)

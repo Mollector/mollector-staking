@@ -24,7 +24,7 @@ export const useWalletConnector = () => {
     activate(connector, async (error) => {
 			console.log(error, 'ERROR ?')
       if (error instanceof UnsupportedChainIdError) {
-        if (connector instanceof InjectedConnector && window.ethereum.isMetaMask) {
+        if (connector instanceof InjectedConnector && (window.ethereum.isMetaMask || window.ethereum.isTrust)) {
           const hasSetup = await setupNetwork()
           if (hasSetup) {
             activate(connector)

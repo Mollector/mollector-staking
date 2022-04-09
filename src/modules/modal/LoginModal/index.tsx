@@ -1,6 +1,6 @@
 import React from 'react'
 import { toast } from 'react-toastify'
-import { MetaIcon, RightArrow, WalletIcon } from 'modules/connect-wallet-pop-up/icons'
+import { MetaIcon, RightArrow, TrustIcon, WalletIcon } from 'modules/connect-wallet-pop-up/icons'
 import useAuth from 'hooks/useAuth'
 import { ConnectorNames } from 'utils/web3React'
 import BaseModal from '../BaseModal'
@@ -18,6 +18,14 @@ const connectors = [
   {
     title: 'WalletConnect',
     connectorId: ConnectorNames.WalletConnect,
+  },
+  {
+    title: 'Trust Wallet',
+    connectorId: ConnectorNames.Injected
+  },
+  {
+    title: 'Inject Wallet',
+    connectorId: ConnectorNames.Injected
   },
 ]
 
@@ -64,6 +72,28 @@ const LoginModal: React.FC<LoginModalProps> = ({ onDismiss = () => {} }) => {
                 <WalletIcon />
               </span>
               WalletConnect
+              <RightArrow className={styles.arrow} />
+            </button>
+          </li>
+          <li className={styles.item}>
+            <button
+              className={styles.button}
+              type="button"
+              onClick={() => {
+                if (window.ethereum && window.ethereum.isMetaMask && window.ethereum.isMetaMask === true) {
+                  login(connectors[2].connectorId)
+                  onDismiss()
+                } else {
+                  toast.error('No MetaMask Wallet', {
+                    hideProgressBar: true,
+                  })
+                }
+              }}
+            >
+              <span className={styles.icon}>
+                <TrustIcon />
+              </span>
+              Trust Wallet
               <RightArrow className={styles.arrow} />
             </button>
           </li>
