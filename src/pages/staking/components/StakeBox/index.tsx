@@ -118,18 +118,21 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
 
   const onHandleStake = async (): Promise<void> => {
     try {
-      if (!(parseFloat(value) > 0)) {
-        return 
-      }
+      // if (!(parseFloat(value) > 0)) {
+      //   return 
+      // }
       setIsStaking(true)
-      var v = new BigNumber(await tokenContract.methods.balanceOf(account).call())
+      var v = await tokenContract.methods.balanceOf(account).call()
       var stakeAmount = getDecimalAmount(Number(value))
 
       if (stakeAmount.isGreaterThan(v)) {
         stakeAmount = v
+        console.log(v.toString())
       }
 
-      const response = await stakingContract.methods.lock(ADDRESS, stakeAmount).send({ from: account })
+      console.log(stakeAmount.toString())
+
+      const response = await stakingContract.methods.lock(ADDRESS, stakeAmount.toString()).send({ from: account })
       setIsStaking(false)
       setValue('')
       toast.success('Successfully staked', {
@@ -137,7 +140,7 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
       })
     } catch (error) {
       setIsStaking(false)
-      toast.error('Fail to stake', {
+      toast.error('Fail to stake ' + (((error as any) || {}).message || ((error as any) || {}).msg || (error as any)).toString(), {
         hideProgressBar: true,
       })
     }
