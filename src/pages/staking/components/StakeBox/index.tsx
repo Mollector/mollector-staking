@@ -69,7 +69,8 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
   const LPContract = useLPContract(provider, ADDRESS)
   const [reserve, setReserve] = useState({
     totalSupply: 0,
-    usd: 0
+    usd: 0,
+    mol: 0
   })
 
   const [isTokenApproved, refetchStatusToken, isLoadingTokenApproved] = useIsApproved(
@@ -167,7 +168,8 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
   
         setReserve({
           totalSupply: new BigNumber(totalSupply).div(10 ** 18).toNumber(),
-          usd: new BigNumber(_reserve1).div(10 ** 18).toNumber() * 2
+          usd: new BigNumber(_reserve1).div(10 ** 18).toNumber(),
+          mol: new BigNumber(_reserve0).div(10 ** 18).toNumber()
         })
       }
     })()
@@ -177,7 +179,7 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
   function getChestImage(amount: any): string {
 
     if (SYMBOL != 'MOL') {
-      var v = (parseInt(tokenStakedValue as any) / reserve.totalSupply) * reserve.usd
+      var v = estimateUSD(amount)
 
       if (v < 500) return ''
 
@@ -200,7 +202,7 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
   function getChestName(amount: any): string {
 
     if (SYMBOL != 'MOL') {
-      var v = (parseInt(tokenStakedValue as any) / reserve.totalSupply) * reserve.usd
+      var v = estimateUSD(amount)
 
       if (v < 500) return ''
 
@@ -218,6 +220,30 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
     if (amount >= 120000) return 'CHAMPION CHEST'
     
     return ''
+  }
+
+  function estimateUSD(v: number) : number {
+    if (reserve.usd / reserve.mol < 0.01) {
+      return parseFloat((
+        (v / reserve.totalSupply) * reserve.usd 
+        + (v / reserve.totalSupply) * reserve.mol * 0.01
+      ).toFixed(2))
+    }
+    else {
+      return parseFloat((
+        (v / reserve.totalSupply) * reserve.usd * 2
+      ).toFixed(2))
+    }
+  }
+
+  function estimateMin() : string {
+    if (SYMBOL == 'MOL') {
+      return parseFloat(MIN).toLocaleString() + ' MOL ';
+    }
+    else {
+      var v = reserve.usd / reserve.mol
+      return `250 BUSD + ${Math.round(250 / v + 10).toLocaleString()} MOL `
+    }
   }
 
   if (!account) {
@@ -248,7 +274,7 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
         </div>
         {tokenStakedValue && reserve.totalSupply && SYMBOL != 'MOL' ?
           <div style={{color: 'gray'}}>
-            Estimate Your Staked LP Value: <span>${parseFloat(((parseInt(tokenStakedValue as any) / reserve.totalSupply) * reserve.usd).toFixed(2)).toLocaleString()}</span>
+            Estimate Your Staked LP Value: <span>${estimateUSD(parseFloat(tokenStakedValue as any)).toLocaleString()}</span>
           </div> : <></>
         }
         <div className={styles.amountText}>Your {SYMBOL} balance: <b>{tokenBalance.toLocaleString()}</b> | {account.slice(0, 5)}...{account.slice(account.length - 5)}</div>
@@ -259,6 +285,11 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
           onHandleChangeToMin={onHandleChangeToMin}
           onHandleChangeToMax={onHandleChangeToMax}
         />
+        {reserve.totalSupply && parseFloat(value) > 0 && SYMBOL != 'MOL' ?
+          <div style={{color: 'gray', textAlign: 'center', marginTop: 5}}>
+            Estimate Value: <span>${estimateUSD(parseFloat(value)).toLocaleString()}</span>
+          </div> : <></>
+        }
         <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
           <button className={styles.withdraw2Button} style={{width: '40%'}} disabled={tokenStakedValue == 0} onClick={() => onHandleWithdraw()}>
             Withdraw All
@@ -292,7 +323,7 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
               </div>
             </div>
             : <div style={{color: 'gray', marginTop: 50, textAlign: 'center'}}>
-              You have not staked enough {SYMBOL}.<br/>Complete at least {parseFloat(MIN).toLocaleString()} {SYMBOL} to earn NFT rewards.
+              You have not staked enough {SYMBOL}.<br/>Complete at least {estimateMin()}to earn NFT rewards.
             </div>
         }
       </div>
