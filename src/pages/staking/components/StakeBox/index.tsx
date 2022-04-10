@@ -118,9 +118,9 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
 
   const onHandleStake = async (): Promise<void> => {
     try {
-      // if (!(parseFloat(value) > 0)) {
-      //   return 
-      // }
+      if (!(parseFloat(value) > 0)) {
+        return 
+      }
       setIsStaking(true)
       var v = await tokenContract.methods.balanceOf(account).call()
       var stakeAmount = getDecimalAmount(Number(value))
