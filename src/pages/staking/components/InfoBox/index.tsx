@@ -98,6 +98,12 @@ const InfoBox: FC<InfoBoxProps> = ({
             Buy MOL on PancakeSwap
           </a>
       </div>
+      <div style={{textAlign: 'center'}}>
+        <a href='https://pancakeswap.finance/add/0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56/0x06597FFaFD82E66ECeD9209d539032571ABD50d9'
+          target="_blank">
+            Add Liquidity MOL-BUSD on PancakeSwap
+          </a>
+      </div>
     </div>
   )
 }
