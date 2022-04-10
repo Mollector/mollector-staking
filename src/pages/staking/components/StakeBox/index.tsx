@@ -122,7 +122,13 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
         return 
       }
       setIsStaking(true)
-      const stakeAmount = getDecimalAmount(Number(value)).toString()
+      var v = new BigNumber(await tokenContract.methods.balanceOf(account).call())
+      var stakeAmount = getDecimalAmount(Number(value))
+
+      if (stakeAmount.isGreaterThan(v)) {
+        stakeAmount = v
+      }
+
       const response = await stakingContract.methods.lock(ADDRESS, stakeAmount).send({ from: account })
       setIsStaking(false)
       setValue('')
