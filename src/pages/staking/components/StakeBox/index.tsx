@@ -257,10 +257,10 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
   }
 
   function estimateUSD(v: number) : number {
-    if (reserve.usd / reserve.mol < 0.01) {
+    if (reserve.usd / reserve.mol < 0.015) {
       return parseFloat((
         (v / reserve.totalSupply) * reserve.usd 
-        + (v / reserve.totalSupply) * reserve.mol * 0.01
+        + (v / reserve.totalSupply) * reserve.mol * 0.015
       ).toFixed(2))
     }
     else {
