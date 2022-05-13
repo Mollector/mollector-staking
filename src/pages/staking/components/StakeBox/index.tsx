@@ -220,7 +220,6 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
 
       return royalchest
     }
-    amount = 100000
 
     if (amount < 12000) return ''
     if (amount < 30000) return fighterchest
@@ -244,8 +243,6 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
 
       return '15 ROYAL CHEST'
     }
-
-    amount = 100000
 
     if (amount < 12000) return ''
     if (amount < 30000) return '1 FIGHTER CHEST'
