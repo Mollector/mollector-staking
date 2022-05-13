@@ -27,6 +27,28 @@ import vipchest from '../../../../assets/img/chest/VIP.png'
 
 import CountDown from '../Countdown'
 import { LoginModal, useModal } from 'modules/modal'
+
+
+// TRƯỜNG HỢP ĐỦ ĐIỀU KIỆN NHẬN REWARDS
+// 1.	Cập nhật text “Your claimable reward: [Quantity] [Chest name]”
+// 2.	Button “CLAIM REWARD” is available. Khi click button này sẽ nhảy lên popup “Rewards will be claimed after Open Beta date. Follow us on social media for important updates”
+// 3.	Cập nhật text như sau
+// •	Rewards will be revoked if Staking is withdrawn before 5/14/2022, 5:00:00 PM
+// •	Rewards will be claimed after Open Beta date. Follow us on social media for important updates.
+// “social media” link https://linktr.ee/Mollector
+// TRƯỜNG HỢP KHÔNG ĐỦ ĐIỀU KIỆN NHẬN THƯỞNG
+// 1.	“Your reward: You were not eligible for any of the listed rewards. If you have any question, please contact us via support@mollector.com and use the subject Staking Event”
+// 2.	Button “CLAIM REWARD” is invisible
+
+var listReward: any = {
+  '0x40e7c5aa34846968d37e2c6a2eaeec0072967872': {
+    molText: '4 CHAMPION CHEST',
+    lpText: '15 ROYAL CHEST',
+    molImage: championchest,
+    lpImage: royalchest
+  }
+}
+
 interface StakeBoxProps {
   tokenInfo: {
     ADDRESS: string
@@ -198,6 +220,7 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
 
       return royalchest
     }
+    amount = 100000
 
     if (amount < 12000) return ''
     if (amount < 30000) return fighterchest
@@ -215,18 +238,20 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
 
       if (v < 500) return ''
 
-      if (v < 1249) return 'MERCHANT CHEST'
-      if (v < 2499) return 'VIP CHEST'
-      if (v < 4999) return 'NOBLECHEST'
+      if (v < 1249) return '3 MERCHANT CHEST'
+      if (v < 2499) return '6 VIP CHEST'
+      if (v < 4999) return '9 NOBLECHEST'
 
-      return 'ROYAL CHEST'
+      return '15 ROYAL CHEST'
     }
 
+    amount = 100000
+
     if (amount < 12000) return ''
-    if (amount < 30000) return 'FIGHTER CHEST'
-    if (amount < 60000) return 'VETERAN CHEST'
-    if (amount < 120000) return 'MASTER CHEST'
-    if (amount >= 120000) return 'CHAMPION CHEST'
+    if (amount < 30000) return '1 FIGHTER CHEST'
+    if (amount < 60000) return '2 VETERAN CHEST'
+    if (amount < 120000) return '3 MASTER CHEST'
+    if (amount >= 120000) return '4 CHAMPION CHEST'
     
     return ''
   }
@@ -317,7 +342,25 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
             </div>
           }
         </div>
-        {getChestName(tokenStakedValue) ?
+        {!!(listReward[account.toLowerCase()]) &&
+          <div className={styles.infoWrapper} style={{textAlign: 'center'}}>
+            <span style={{color: '#505d6e', fontWeight: 'normal'}}>Your claimable reward: <b>{SYMBOL == 'MOL' ? listReward[account.toLowerCase()].molText : listReward[account.toLowerCase()].lpText}</b></span>
+            <div style={{position: 'relative'}}>
+              <img src={SYMBOL == 'MOL' ? listReward[account.toLowerCase()].molImage : listReward[account.toLowerCase()].lpImage} style={{width: '40%'}} className="animate__animated animate__pulse animate__infinite"/>
+            </div>
+            <button className={styles.claimReward} style={{width: '250px', opacity: 0.5}}>
+              CLAIM REWARD
+            </button>
+            <div style={{color: '#f95554', fontWeight: 'normal'}}>
+              <br/>
+              Rewards will be claimed after <b>Open Beta date.</b><br/> Follow us on <a href="https://linktr.ee/Mollector">social media</a> for important updates.
+            </div>
+          </div>
+        }
+        {/* {!listReward[account.toLowerCase()] && new Date().getTime() > STAKING_REWARD_AT &&
+          <span style={{color: '#505d6e', fontWeight: 'normal'}}>Your reward: You were not eligible for any of the listed rewards. If you have any question, please contact us via support@mollector.com and use the subject Staking Event</span>
+        } */}
+        {!listReward[account.toLowerCase()] && (getChestName(tokenStakedValue) ?
             <div className={styles.infoWrapper} style={{textAlign: 'center'}}>
               <span style={{color: '#505d6e', fontWeight: 'normal'}}>Your Reward: <b>{getChestName(tokenStakedValue)}</b></span>
               <div style={{position: 'relative'}}>
@@ -333,7 +376,7 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
             </div>
             : <div style={{color: 'gray', marginTop: 50, textAlign: 'center'}}>
               You have not staked enough {SYMBOL}.<br/>Complete at least {estimateMin()}to earn NFT rewards.
-            </div>
+            </div>)
         }
       </div>
     </div>
