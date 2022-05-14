@@ -46,7 +46,7 @@ var listReward: any = {
   '0x40e7c5aa34846968d37e2c6a2eaeec0072967872': {
     molText: '',
     lpText: '',
-    molImage: nonechest,
+    molImage: veteranchest,
     lpImage: nonechest
   },
   '0x3e77f384c9e55d8ae52684830f0db571c5116e88': {
@@ -333,6 +333,14 @@ var listReward: any = {
   }
 }
 
+function reward(s: string) {
+  return listReward[s] || {
+    molText: '',
+    lpText: '',
+    molImage: nonechest,
+    lpImage: nonechest
+  }
+}
 interface StakeBoxProps {
   tokenInfo: {
     ADDRESS: string
@@ -626,11 +634,11 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
           }
         </div>
 
-        {SYMBOL == 'MOL' && listReward[account.toLowerCase()] && listReward[account.toLowerCase()].molText &&
+        {SYMBOL == 'MOL' && reward(account.toLowerCase()).molText &&
           <div className={styles.infoWrapper} style={{textAlign: 'center'}}>
-            <span style={{color: '#505d6e', fontWeight: 'normal'}}>Your claimable reward: <b>{listReward[account.toLowerCase()].molText}</b></span>
+            <span style={{color: '#505d6e', fontWeight: 'normal'}}>Your claimable reward: <b>{reward(account.toLowerCase()).molText}</b></span>
             <div style={{position: 'relative'}}>
-              <img src={listReward[account.toLowerCase()].molImage} style={{width: '40%'}} className="animate__animated animate__pulse animate__infinite"/>
+              <img src={reward(account.toLowerCase()).molImage} style={{width: '40%'}} className="animate__animated animate__pulse animate__infinite"/>
             </div>
             <button className={styles.claimReward} style={{width: '250px', opacity: 0.5}}>
               CLAIM REWARD
@@ -642,11 +650,11 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
           </div>
         }
 
-        {SYMBOL != 'MOL' && listReward[account.toLowerCase()] && listReward[account.toLowerCase()].lpText &&
+        {SYMBOL != 'MOL' && reward(account.toLowerCase()).lpText &&
           <div className={styles.infoWrapper} style={{textAlign: 'center'}}>
-            <span style={{color: '#505d6e', fontWeight: 'normal'}}>Your claimable reward: <b>{listReward[account.toLowerCase()].lpText}</b></span>
+            <span style={{color: '#505d6e', fontWeight: 'normal'}}>Your claimable reward: <b>{reward(account.toLowerCase()).lpText}</b></span>
             <div style={{position: 'relative'}}>
-              <img src={listReward[account.toLowerCase()].lpImage} style={{width: '40%'}} className="animate__animated animate__pulse animate__infinite"/>
+              <img src={reward(account.toLowerCase()).lpImage} style={{width: '40%'}} className="animate__animated animate__pulse animate__infinite"/>
             </div>
             <button className={styles.claimReward} style={{width: '250px', opacity: 0.5}}>
               CLAIM REWARD
@@ -658,14 +666,14 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
           </div>
         }
 
-        {(SYMBOL == 'MOL' && (!listReward[account.toLowerCase()] || !listReward[account.toLowerCase()].molText)) &&
+        {(SYMBOL == 'MOL' && !reward(account.toLowerCase()).molText) &&
           <div style={{color: '#505d6e', fontWeight: 'normal', textAlign: 'center'}}>Your reward: You were not eligible for any of the listed rewards. If you have any question, please contact us via support@mollector.com and use the subject Staking Event</div>
         }
-        {(SYMBOL != 'MOL' && (!listReward[account.toLowerCase()] || !listReward[account.toLowerCase()].lpText)) &&
+        {(SYMBOL != 'MOL' && !reward(account.toLowerCase()).lpText) &&
           <div style={{color: '#505d6e', fontWeight: 'normal', textAlign: 'center'}}>Your reward: You were not eligible for any of the listed rewards. If you have any question, please contact us via support@mollector.com and use the subject Staking Event</div>
         }
 
-        {(!listReward[account.toLowerCase()] && !listReward[account.toLowerCase()].molText && !listReward[account.toLowerCase()].lpText) && (getChestName(tokenStakedValue) ?
+        {/* {(!reward(account.toLowerCase()).molText && !reward(account.toLowerCase()).lpText) && (getChestName(tokenStakedValue) ?
             <div className={styles.infoWrapper} style={{textAlign: 'center'}}>
               <span style={{color: '#505d6e', fontWeight: 'normal'}}>Your Reward: <b>{getChestName(tokenStakedValue)}</b></span>
               <div style={{position: 'relative'}}>
@@ -682,7 +690,7 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
             : <div style={{color: 'gray', marginTop: 50, textAlign: 'center'}}>
               You have not staked enough {SYMBOL}.<br/>Complete at least {estimateMin()}to earn NFT rewards.
             </div>)
-        }
+        } */}
       </div>
     </div>
   )

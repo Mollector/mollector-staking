@@ -1,21 +1,21 @@
 {
   "files": {
     "main.css": "/static/css/main.0b94507c.chunk.css",
-    "main.js": "/static/js/main.976843d2.chunk.js",
-    "main.js.map": "/static/js/main.976843d2.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.6279e8b3.js",
-    "runtime-main.js.map": "/static/js/runtime-main.6279e8b3.js.map",
+    "main.js": "/static/js/main.3d55ddf7.chunk.js",
+    "main.js.map": "/static/js/main.3d55ddf7.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.ccdb0c1d.js",
+    "runtime-main.js.map": "/static/js/runtime-main.ccdb0c1d.js.map",
     "static/css/2.f4c56af9.chunk.css": "/static/css/2.f4c56af9.chunk.css",
-    "static/js/2.cdbdcc9e.chunk.js": "/static/js/2.cdbdcc9e.chunk.js",
-    "static/js/2.cdbdcc9e.chunk.js.map": "/static/js/2.cdbdcc9e.chunk.js.map",
-    "static/js/3.f12d2180.chunk.js": "/static/js/3.f12d2180.chunk.js",
-    "static/js/3.f12d2180.chunk.js.map": "/static/js/3.f12d2180.chunk.js.map",
+    "static/js/2.b4531e35.chunk.js": "/static/js/2.b4531e35.chunk.js",
+    "static/js/2.b4531e35.chunk.js.map": "/static/js/2.b4531e35.chunk.js.map",
+    "static/js/3.da93b07a.chunk.js": "/static/js/3.da93b07a.chunk.js",
+    "static/js/3.da93b07a.chunk.js.map": "/static/js/3.da93b07a.chunk.js.map",
     "static/js/4.9cd35510.chunk.js": "/static/js/4.9cd35510.chunk.js",
     "static/js/4.9cd35510.chunk.js.map": "/static/js/4.9cd35510.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.f4c56af9.chunk.css.map": "/static/css/2.f4c56af9.chunk.css.map",
     "static/css/main.0b94507c.chunk.css.map": "/static/css/main.0b94507c.chunk.css.map",
-    "static/js/2.cdbdcc9e.chunk.js.LICENSE.txt": "/static/js/2.cdbdcc9e.chunk.js.LICENSE.txt",
+    "static/js/2.b4531e35.chunk.js.LICENSE.txt": "/static/js/2.b4531e35.chunk.js.LICENSE.txt",
     "static/media/Champion.1ca6072b.png": "/static/media/Champion.1ca6072b.png",
     "static/media/Fighter.f20328d4.png": "/static/media/Fighter.f20328d4.png",
     "static/media/index.css": "/static/media/Gotham-Thin.04f6daaf.otf",
@@ -31,10 +31,10 @@
     "static/media/menu.c2d54434.png": "/static/media/menu.c2d54434.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.6279e8b3.js",
+    "static/js/runtime-main.ccdb0c1d.js",
     "static/css/2.f4c56af9.chunk.css",
-    "static/js/2.cdbdcc9e.chunk.js",
+    "static/js/2.b4531e35.chunk.js",
     "static/css/main.0b94507c.chunk.css",
-    "static/js/main.976843d2.chunk.js"
+    "static/js/main.3d55ddf7.chunk.js"
   ]
 }
