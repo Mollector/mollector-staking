@@ -40,15 +40,307 @@ import { LoginModal, useModal } from 'modules/modal'
 // 1.	“Your reward: You were not eligible for any of the listed rewards. If you have any question, please contact us via support@mollector.com and use the subject Staking Event”
 // 2.	Button “CLAIM REWARD” is invisible
 
+var nonechest = ''
+
 var listReward: any = {
   '0x40e7c5aa34846968d37e2c6a2eaeec0072967872': {
+    molText: '',
+    lpText: '',
+    molImage: veteranchest,
+    lpImage: nonechest
+  },
+  '0x3e77f384c9e55d8ae52684830f0db571c5116e88': {
+    molText: '',
+    lpText: '',
+    molImage: nonechest,
+    lpImage: nonechest
+  },
+  '0x95843d66df555a86bf4e59f9af8fd5620d7bbe4e': {
+    molText: '2 VETERAN CHEST',
+    lpText: '',
+    molImage: veteranchest,
+    lpImage: nonechest
+  },
+  '0xc33216acd94b4862599f3ffedd98d370a4fb3b98': {
+    molText: '',
+    lpText: '',
+    molImage: nonechest,
+    lpImage: nonechest
+  },
+  '0x63eae70a7bef426dc2cd1ebbd0c176ea6448fb25': {
     molText: '4 CHAMPION CHEST',
-    lpText: '15 ROYAL CHEST',
+    lpText: '',
     molImage: championchest,
+    lpImage: nonechest
+  },
+  '0x9f73a63a3743df901028ed5bd73055e685bd9fa5': {
+    molText: '1 FIGHTER CHEST',
+    lpText: '',
+    molImage: fighterchest,
+    lpImage: nonechest
+  },
+  '0xc914dcff3b059bfcc1abf344ac6fdc8e8d8117ff': {
+    molText: '1 FIGHTER CHEST',
+    lpText: '',
+    molImage: fighterchest,
+    lpImage: nonechest
+  },
+  '0xc10842058497efb5d3c4ae200abe3e2114e0479f': {
+    molText: '1 FIGHTER CHEST',
+    lpText: '',
+    molImage: fighterchest,
+    lpImage: nonechest
+  },
+  '0x0e916752b8df4b17202aa4e597bbfe6ad2a6ba2e': {
+    molText: '',
+    lpText: '',
+    molImage: nonechest,
+    lpImage: nonechest
+  },
+  '0x95fefb9c6c66b0199e30db23fd67d5bf9badef5e': {
+    molText: '4 CHAMPION CHEST',
+    lpText: '',
+    molImage: championchest,
+    lpImage: nonechest
+  },
+  '0x40b13961da4c7374396ccb22d9fb3966907578f3': {
+    molText: '2 VETERAN CHEST',
+    lpText: '',
+    molImage: veteranchest,
+    lpImage: nonechest
+  },
+  '0x8a42a695b150f10ed895e9cfcb5d1dc5955ed1dd': {
+    molText: '2 VETERAN CHEST',
+    lpText: '',
+    molImage: veteranchest,
+    lpImage: nonechest
+  },
+  '0x532828631c538b5b235b0bb88da5a06b178c0623': {
+    molText: '1 FIGHTER CHEST',
+    lpText: '',
+    molImage: fighterchest,
+    lpImage: nonechest
+  },
+  '0xa40a7931f9c754c4ed583648fc383d27436674b9': {
+    molText: '2 VETERAN CHEST',
+    lpText: '',
+    molImage: veteranchest,
+    lpImage: nonechest
+  },
+  '0xdb71a18336e01ac76fd93b15ed89a720cb8c0734': {
+    molText: '4 CHAMPION CHEST',
+    lpText: '',
+    molImage: championchest,
+    lpImage: nonechest
+  },
+  '0xf9a35ad0d67cda8a685591b5c379a5dd99d14bf2': {
+    molText: '1 FIGHTER CHEST',
+    lpText: '3 MERCHANT CHEST',
+    molImage: fighterchest,
+    lpImage: merchantchest
+  },
+  '0x039b7767d2c697a9007a41c56f91d02bdefc5781': {
+    molText: '2 VETERAN CHEST',
+    lpText: '',
+    molImage: veteranchest,
+    lpImage: nonechest
+  },
+  '0x03556fabaf25763dcfb6af1e411820c6e776f8a8': {
+    molText: '1 FIGHTER CHEST',
+    lpText: '',
+    molImage: fighterchest,
+    lpImage: nonechest
+  },
+  '0x111d216f65a568f494b05da4de30dbb39b637ca7': {
+    molText: '1 FIGHTER CHEST',
+    lpText: '',
+    molImage: fighterchest,
+    lpImage: nonechest
+  },
+  '0x861ab6938f7aa6de8689896fc6f5899956dbcf4e': {
+    molText: '1 FIGHTER CHEST',
+    lpText: '',
+    molImage: fighterchest,
+    lpImage: nonechest
+  },
+  '0xdc283e1bfaae576ea5819ec684b72536ad7c8d47': {
+    molText: '1 FIGHTER CHEST',
+    lpText: '',
+    molImage: fighterchest,
+    lpImage: nonechest
+  },
+  '0xc0bdaf2a06b5a87035d331f9b48868357e2641a8': {
+    molText: '3 MASTER CHEST',
+    lpText: '',
+    molImage: masterchest,
+    lpImage: nonechest
+  },
+  '0xd567f9e3d08df3f32a7f235a6b290a68b74e73c3': {
+    molText: '',
+    lpText: '3 MERCHANT CHEST',
+    molImage: nonechest,
+    lpImage: merchantchest
+  },
+  '0xb752a092c915778dc73a42cfd8e527d3203fc265': {
+    molText: '2 VETERAN CHEST',
+    lpText: '',
+    molImage: veteranchest,
+    lpImage: nonechest
+  },
+  '0x7cf349719f21244cb4fa3c436e84bb5a2710dc5a': {
+    molText: '',
+    lpText: '',
+    molImage: nonechest,
+    lpImage: nonechest
+  },
+  '0x7a7c816c0817dbb624c039fc4ad86d59609952bb': {
+    molText: '1 FIGHTER CHEST',
+    lpText: '15 ROYAL CHEST',
+    molImage: fighterchest,
     lpImage: royalchest
+  },
+  '0xa017fa3c190461b0b1b1c635d9b90b0b50cf3396': {
+    molText: '2 VETERAN CHEST',
+    lpText: '',
+    molImage: veteranchest,
+    lpImage: nonechest
+  },
+  '0xb03af61ce57bc5a0939b2f076ddb89940682d2f9': {
+    molText: '',
+    lpText: '',
+    molImage: nonechest,
+    lpImage: nonechest
+  },
+  '0x6f9f8d796e2ace5b69b2223cb6fb69f937a123c0': {
+    molText: '',
+    lpText: '3 MERCHANT CHEST',
+    molImage: nonechest,
+    lpImage: merchantchest
+  },
+  '0xcf01d6282d9db887d3a7e45dd03e13192cb6c838': {
+    molText: '',
+    lpText: '',
+    molImage: nonechest,
+    lpImage: nonechest
+  },
+  '0x18bb2bd0a8824a309b057fb63468f9c09d13839f': {
+    molText: '1 FIGHTER CHEST',
+    lpText: '',
+    molImage: fighterchest,
+    lpImage: nonechest
+  },
+  '0xb5ce675b7885c794d34f1dfd68dd1b98423bd439': {
+    molText: '1 FIGHTER CHEST',
+    lpText: '',
+    molImage: fighterchest,
+    lpImage: nonechest
+  },
+  '0x3b89fad59c2cfee70d5da0643278f92a2e82b565': {
+    molText: '1 FIGHTER CHEST',
+    lpText: '',
+    molImage: fighterchest,
+    lpImage: nonechest
+  },
+  '0x3ba26f7cce4bdd436d2a3d1d5e3126567d3863d7': {
+    molText: '',
+    lpText: '',
+    molImage: nonechest,
+    lpImage: nonechest
+  },
+  '0xd899a2802e9b2d1644574fb1c6be7b3671bb0d09': {
+    molText: '1 FIGHTER CHEST',
+    lpText: '',
+    molImage: fighterchest,
+    lpImage: nonechest
+  },
+  '0x17902aea62ffa0e56117dfa14f6ef649f3862a93': {
+    molText: '4 CHAMPION CHEST',
+    lpText: '',
+    molImage: championchest,
+    lpImage: nonechest
+  },
+  '0x0a2a81672be53fb6d94978a2477162030f7507e0': {
+    molText: '4 CHAMPION CHEST',
+    lpText: '',
+    molImage: championchest,
+    lpImage: nonechest
+  },
+  '0x3fddaedca8a6fe376a868aeb4ca8e4b8e7987df6': {
+    molText: '1 FIGHTER CHEST',
+    lpText: '',
+    molImage: fighterchest,
+    lpImage: nonechest
+  },
+  '0xdf693a86ca46fe0e33cc3962eea13cc743302c38': {
+    molText: '1 FIGHTER CHEST',
+    lpText: '',
+    molImage: fighterchest,
+    lpImage: nonechest
+  },
+  '0xba6e61797d6d9ff765aacf7a97cf2a1b475e7ce7': {
+    molText: '',
+    lpText: '',
+    molImage: nonechest,
+    lpImage: nonechest
+  },
+  '0x4f5bb22385b8359af23ff6e5044d13cd4fd9976c': {
+    molText: '2 VETERAN CHEST',
+    lpText: '',
+    molImage: veteranchest,
+    lpImage: nonechest
+  },
+  '0x5c720e7eb32c009419846d70945da9427102d9f6': {
+    molText: '1 FIGHTER CHEST',
+    lpText: '',
+    molImage: fighterchest,
+    lpImage: nonechest
+  },
+  '0xfaf5f1257ee1b0a550a4d4edb1e1435dc0967565': {
+    molText: '',
+    lpText: '',
+    molImage: nonechest,
+    lpImage: nonechest
+  },
+  '0x3550c1930d80d2d704e929954a9be6b2b4dd1ce9': {
+    molText: '1 FIGHTER CHEST',
+    lpText: '',
+    molImage: fighterchest,
+    lpImage: nonechest
+  },
+  '0x6dd5ee4dd0bd6dcd3da5bc41452c743e28b8ce6e': {
+    molText: '1 FIGHTER CHEST',
+    lpText: '3 MERCHANT CHEST',
+    molImage: fighterchest,
+    lpImage: merchantchest
+  },
+  '0x0a1ac6840048783d4db0d2d8548d76c969d51b0e': {
+    molText: '',
+    lpText: '',
+    molImage: nonechest,
+    lpImage: nonechest
+  },
+  '0x21c4ec2e3aef89b9cd8d590ad95c9a5cf6bec546': {
+    molText: '',
+    lpText: '',
+    molImage: nonechest,
+    lpImage: nonechest
+  },
+  '0x80c0632fdec7d293d58b829eee92e2f6a557dd17': {
+    molText: '',
+    lpText: '9 NOBLECHEST',
+    molImage: nonechest,
+    lpImage: noblechest
   }
 }
 
+function reward(s: string) {
+  return listReward[s] || {
+    molText: '',
+    lpText: '',
+    molImage: nonechest,
+    lpImage: nonechest
+  }
+}
 interface StakeBoxProps {
   tokenInfo: {
     ADDRESS: string
@@ -254,6 +546,8 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
   }
 
   function estimateUSD(v: number) : number {
+    console.log('hello')
+    console.log(reserve.usd, reserve.mol, reserve.totalSupply)
     if (reserve.usd / reserve.mol < 0.015) {
       return parseFloat((
         (v / reserve.totalSupply) * reserve.usd 
@@ -339,11 +633,12 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
             </div>
           }
         </div>
-        {!!(listReward[account.toLowerCase()]) &&
+
+        {SYMBOL == 'MOL' && reward(account.toLowerCase()).molText &&
           <div className={styles.infoWrapper} style={{textAlign: 'center'}}>
-            <span style={{color: '#505d6e', fontWeight: 'normal'}}>Your claimable reward: <b>{SYMBOL == 'MOL' ? listReward[account.toLowerCase()].molText : listReward[account.toLowerCase()].lpText}</b></span>
+            <span style={{color: '#505d6e', fontWeight: 'normal'}}>Your claimable reward: <b>{reward(account.toLowerCase()).molText}</b></span>
             <div style={{position: 'relative'}}>
-              <img src={SYMBOL == 'MOL' ? listReward[account.toLowerCase()].molImage : listReward[account.toLowerCase()].lpImage} style={{width: '40%'}} className="animate__animated animate__pulse animate__infinite"/>
+              <img src={reward(account.toLowerCase()).molImage} style={{width: '40%'}} className="animate__animated animate__pulse animate__infinite"/>
             </div>
             <button className={styles.claimReward} style={{width: '250px', opacity: 0.5}}>
               CLAIM REWARD
@@ -354,10 +649,31 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
             </div>
           </div>
         }
-        {/* {!listReward[account.toLowerCase()] && new Date().getTime() > STAKING_REWARD_AT &&
-          <span style={{color: '#505d6e', fontWeight: 'normal'}}>Your reward: You were not eligible for any of the listed rewards. If you have any question, please contact us via support@mollector.com and use the subject Staking Event</span>
-        } */}
-        {!listReward[account.toLowerCase()] && (getChestName(tokenStakedValue) ?
+
+        {SYMBOL != 'MOL' && reward(account.toLowerCase()).lpText &&
+          <div className={styles.infoWrapper} style={{textAlign: 'center'}}>
+            <span style={{color: '#505d6e', fontWeight: 'normal'}}>Your claimable reward: <b>{reward(account.toLowerCase()).lpText}</b></span>
+            <div style={{position: 'relative'}}>
+              <img src={reward(account.toLowerCase()).lpImage} style={{width: '40%'}} className="animate__animated animate__pulse animate__infinite"/>
+            </div>
+            <button className={styles.claimReward} style={{width: '250px', opacity: 0.5}}>
+              CLAIM REWARD
+            </button>
+            <div style={{color: '#f95554', fontWeight: 'normal'}}>
+              <br/>
+              Rewards will be claimed after <b>Open Beta date.</b><br/> Follow us on <a href="https://linktr.ee/Mollector">social media</a> for important updates.
+            </div>
+          </div>
+        }
+
+        {(SYMBOL == 'MOL' && !reward(account.toLowerCase()).molText) &&
+          <div style={{color: '#505d6e', fontWeight: 'normal', textAlign: 'center'}}>Your reward: You were not eligible for any of the listed rewards. If you have any question, please contact us via support@mollector.com and use the subject Staking Event</div>
+        }
+        {(SYMBOL != 'MOL' && !reward(account.toLowerCase()).lpText) &&
+          <div style={{color: '#505d6e', fontWeight: 'normal', textAlign: 'center'}}>Your reward: You were not eligible for any of the listed rewards. If you have any question, please contact us via support@mollector.com and use the subject Staking Event</div>
+        }
+
+        {/* {(!reward(account.toLowerCase()).molText && !reward(account.toLowerCase()).lpText) && (getChestName(tokenStakedValue) ?
             <div className={styles.infoWrapper} style={{textAlign: 'center'}}>
               <span style={{color: '#505d6e', fontWeight: 'normal'}}>Your Reward: <b>{getChestName(tokenStakedValue)}</b></span>
               <div style={{position: 'relative'}}>
@@ -374,7 +690,7 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
             : <div style={{color: 'gray', marginTop: 50, textAlign: 'center'}}>
               You have not staked enough {SYMBOL}.<br/>Complete at least {estimateMin()}to earn NFT rewards.
             </div>)
-        }
+        } */}
       </div>
     </div>
   )
