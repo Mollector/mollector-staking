@@ -127,8 +127,8 @@ const StakeBox: FC<StakeBoxProps> = ({ tokenInfo }) => {
   const onHandleWithdraw = async (): Promise<void> => {
     try {
       setIsWithdraw(true)
-      const withdrawAmount = getDecimalAmount(Number(tokenStakedValue)).toString()
-      const response = await stakingContract.methods.withdraw(ADDRESS, withdrawAmount).send({ from: account })
+      const data = await stakingContract.methods.amounts(ADDRESS, account).call()
+      const response = await stakingContract.methods.withdraw(ADDRESS, data).send({ from: account })
       setIsWithdraw(false)
     } catch (error) {
       setIsWithdraw(false)
